@@ -1,0 +1,6 @@
+{
+    "error": "service_tidak_merespons",
+    "message": "Service 'course' tidak merespons.",
+    "target": "http://127.0.0.1:8103"
+}
+HTTP 503

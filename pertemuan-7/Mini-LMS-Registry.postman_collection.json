@@ -1,0 +1,171 @@
+{
+  "info": {
+    "name": "Mini-LMS Registry & Name Service",
+    "description": "Koleksi pengujian P07.2 Kelompok 4 — Sistem Terdistribusi Pilihan C.\nJalankan: registry :8100, gateway :8101, course-mock :8103.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8101"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Registry - semua binding",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8100/api/registry",
+          "host": [
+            "http://127.0.0.1:8100/api/registry"
+          ]
+        },
+        "description": "Harap: 200, 7 service."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"200 OK\",()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Registry - nama valid",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8100/api/registry/course",
+          "host": [
+            "http://127.0.0.1:8100/api/registry/course"
+          ]
+        },
+        "description": "Harap: 200."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"200 OK\",()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Registry - nama 404",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8100/api/registry/layanan-aneh",
+          "host": [
+            "http://127.0.0.1:8100/api/registry/layanan-aneh"
+          ]
+        },
+        "description": "Harap: 404 nama_tidak_ditemukan."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"404\",()=>pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Gateway - lookup via fungsi",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/gateway/lookup/course",
+          "host": [
+            "{{base_url}}/api/gateway/lookup/course"
+          ]
+        },
+        "description": "Harap: 200."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"200 OK\",()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Gateway - teruskan ke course",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/gateway/course",
+          "host": [
+            "{{base_url}}/api/gateway/course"
+          ]
+        },
+        "description": "Harap: 200, via=gateway."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"200 OK\",()=>pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Gateway - nama 500",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/gateway/lookup/layanan-aneh",
+          "host": [
+            "{{base_url}}/api/gateway/lookup/layanan-aneh"
+          ]
+        },
+        "description": "Harap: 500 nama_tidak_ditemukan."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"500\",()=>pm.response.to.have.status(500));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

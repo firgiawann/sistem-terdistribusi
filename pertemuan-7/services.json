@@ -1,0 +1,9 @@
+{
+    "assignment": "http://127.0.0.1:8104",
+    "auth": "http://127.0.0.1:8102",
+    "course": "http://127.0.0.1:8103",
+    "gateway": "http://127.0.0.1:8101",
+    "monitoring": "http://127.0.0.1:8107",
+    "notification": "http://127.0.0.1:8106",
+    "submission": "http://127.0.0.1:8105"
+}

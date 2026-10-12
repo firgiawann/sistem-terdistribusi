@@ -1,0 +1,6 @@
+{
+    "name": "course",
+    "base_url": "http://127.0.0.1:8103",
+    "via": "resolver-function"
+}
+HTTP 200

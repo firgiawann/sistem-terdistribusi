@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="437" font-family="ui-monospace, Menlo, Consolas, monospace">
+<rect width="1160" height="437" fill="#0d1117"/>
+<rect width="1160" height="58" fill="#161b22"/>
+<text x="30" y="36" fill="#e6edf3" font-size="20" font-weight="bold">Skenario 2 — Nama tidak ditemukan → 404</text>
+<text x="30" y="88" fill="#8b949e" font-size="17">Mini-LMS Registry · Kelompok 4 · registry</text>
+<text x="30" y="113" fill="#7ee787" font-size="17" font-weight="bold">$ curl 127.0.0.1:8100/api/registry/layanan-aneh</text>
+<text x="30" y="140" fill="#ff7b72" font-size="17">→ HTTP 404 Not Found</text>
+<text x="30" y="167" fill="#e6edf3" font-size="17">{</text>
+<text x="30" y="194" fill="#ff7b72" font-size="17">  "error": "nama_tidak_ditemukan",</text>
+<text x="30" y="221" fill="#e6edf3" font-size="17">  "message": "Nama service 'layanan-aneh' tidak terdaftar di registry."</text>
+<text x="30" y="248" fill="#e6edf3" font-size="17">}</text>
+<text x="30" y="275" fill="#e6edf3" font-size="17"></text>
+<text x="30" y="302" fill="#7ee787" font-size="17" font-weight="bold">$ curl 127.0.0.1:8101/api/gateway/lookup/layanan-aneh</text>
+<text x="30" y="329" fill="#ff7b72" font-size="17">→ HTTP 500 (error konfigurasi — bukan 503)</text>
+<text x="30" y="356" fill="#e6edf3" font-size="17"></text>
+<text x="30" y="383" fill="#79c0ff" font-size="17">→ Nama hilang ≠ service mati: dibedakan tahap error-nya.</text>
+</svg>

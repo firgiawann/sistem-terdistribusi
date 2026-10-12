@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="437" font-family="ui-monospace, Menlo, Consolas, monospace">
+<rect width="1160" height="437" fill="#0d1117"/>
+<rect width="1160" height="58" fill="#161b22"/>
+<text x="30" y="36" fill="#e6edf3" font-size="20" font-weight="bold">Skenario 1 — Lookup nama valid</text>
+<text x="30" y="88" fill="#8b949e" font-size="17">Mini-LMS Registry · Kelompok 4 · registry + gateway</text>
+<text x="30" y="113" fill="#7ee787" font-size="17" font-weight="bold">$ curl 127.0.0.1:8100/api/registry/course</text>
+<text x="30" y="140" fill="#7ee787" font-size="17">→ HTTP 200 OK</text>
+<text x="30" y="167" fill="#e6edf3" font-size="17">  { "name": "course", "base_url": "http://127.0.0.1:8103" }</text>
+<text x="30" y="194" fill="#e6edf3" font-size="17"></text>
+<text x="30" y="221" fill="#7ee787" font-size="17" font-weight="bold">$ curl 127.0.0.1:8101/api/gateway/course</text>
+<text x="30" y="248" fill="#7ee787" font-size="17">→ HTTP 200 OK</text>
+<text x="30" y="275" fill="#e6edf3" font-size="17">  { "via": "gateway", "resolved_from": "course",</text>
+<text x="30" y="302" fill="#e6edf3" font-size="17">    "base_url": "http://127.0.0.1:8103", "upstream_status": 200,</text>
+<text x="30" y="329" fill="#e6edf3" font-size="17">    "data": { "service": "course-service", ... } }</text>
+<text x="30" y="356" fill="#e6edf3" font-size="17"></text>
+<text x="30" y="383" fill="#7ee787" font-size="17">→ Gateway me-resolve nama 'course' lalu meneruskan request. ✓</text>
+</svg>

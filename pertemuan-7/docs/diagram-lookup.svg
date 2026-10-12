@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="430" font-family="system-ui, sans-serif">
+<rect width="1160" height="430" fill="#ffffff"/>
+<text x="30" y="40" font-size="22" font-weight="bold" fill="#111">Alur Lookup — Gateway ke Course Service</text>
+<text x="30" y="66" font-size="14" fill="#666">P07.2 · Kelompok 4 · Sistem Terdistribusi – Pilihan C</text>
+<rect x="30" y="110" width="200" height="90" rx="10" fill="#f0f6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="130" y="148" text-anchor="middle" font-size="17" font-weight="bold" fill="#111">Client</text>
+<text x="130" y="172" text-anchor="middle" font-size="12" fill="#444">GET /api/gateway/course</text>
+<rect x="330" y="110" width="200" height="90" rx="10" fill="#f0f6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="430" y="148" text-anchor="middle" font-size="17" font-weight="bold" fill="#111">Gateway :8101</text>
+<text x="430" y="172" text-anchor="middle" font-size="12" fill="#444">resolveService('course')</text>
+<rect x="630" y="110" width="200" height="90" rx="10" fill="#f0f6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="730" y="148" text-anchor="middle" font-size="17" font-weight="bold" fill="#111">Registry</text>
+<text x="730" y="172" text-anchor="middle" font-size="12" fill="#444">services.json / :8100</text>
+<rect x="930" y="110" width="200" height="90" rx="10" fill="#f0f6ff" stroke="#2563eb" stroke-width="2"/>
+<text x="1030" y="148" text-anchor="middle" font-size="17" font-weight="bold" fill="#111">Course :8103</text>
+<text x="1030" y="172" text-anchor="middle" font-size="12" fill="#444">GET /api/info → 200</text>
+<line x1="230" y1="155" x2="330" y2="155" stroke="#111" stroke-width="2" marker-end="url(#ah)"/>
+<text x="280" y="145" text-anchor="middle" font-size="12" fill="#111">1. request</text>
+<line x1="530" y1="155" x2="630" y2="155" stroke="#111" stroke-width="2" marker-end="url(#ah)"/>
+<text x="580" y="145" text-anchor="middle" font-size="12" fill="#111">2. lookup nama</text>
+<line x1="830" y1="155" x2="930" y2="155" stroke="#111" stroke-width="2" marker-end="url(#ah)"/>
+<text x="880" y="145" text-anchor="middle" font-size="12" fill="#111">4. teruskan request</text>
+<defs><marker id="ah" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8" fill="none" stroke="#111" stroke-width="2"/></marker></defs>
+<line x1="830" y1="185" x2="530" y2="185" stroke="#111" stroke-width="2" marker-end="url(#ah)"/>
+<text x="680" y="208" text-anchor="middle" font-size="12" fill="#111">3. base_url 127.0.0.1:8103</text>
+<text x="30" y="260" font-size="14" fill="#333">Catatan:</text>
+<text x="30" y="286" font-size="14" fill="#333">• Client hanya kenal SATU alamat (gateway). Alamat tiap service boleh berubah.</text>
+<text x="30" y="312" font-size="14" fill="#333">• Ganti port cukup di services.json — tanpa mengubah source code client maupun gateway.</text>
+<text x="30" y="338" font-size="14" fill="#333">• Nama tidak dikenal → error konfigurasi (500); service tidak merespons → 503.</text>
+</svg>

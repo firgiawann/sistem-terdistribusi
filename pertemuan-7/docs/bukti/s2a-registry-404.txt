@@ -1,0 +1,5 @@
+{
+    "error": "nama_tidak_ditemukan",
+    "message": "Nama service 'layanan-aneh' tidak terdaftar di registry."
+}
+HTTP 404

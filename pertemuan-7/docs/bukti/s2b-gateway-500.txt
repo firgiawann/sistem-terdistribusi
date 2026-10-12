@@ -1,0 +1,6 @@
+{
+    "error": "nama_tidak_ditemukan",
+    "message": "Nama service 'layanan-aneh' tidak terdaftar — periksa services.json.",
+    "name": "layanan-aneh"
+}
+HTTP 500

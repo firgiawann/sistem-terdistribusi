@@ -1,0 +1,13 @@
+{
+    "via": "gateway",
+    "resolved_from": "course",
+    "base_url": "http://127.0.0.1:8103",
+    "upstream_status": 200,
+    "data": {
+        "service": "course-service",
+        "name": "course",
+        "description": "Layanan data mata kuliah (mock untuk demo name service)",
+        "version": "1.0"
+    }
+}
+HTTP 200

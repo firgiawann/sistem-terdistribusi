@@ -201,6 +201,11 @@ if ($method === 'GET' && $parts === []) {
     landing();
 }
 
+// Health check untuk exit ticket UTS (name service materi P07)
+if ($method === 'GET' && $parts === ['health']) {
+    send_json(200, ['service' => 'submission', 'status' => 'ok', 'version' => '1.0']);
+}
+
 if ($parts[0] ?? null === 'api' && count($parts) >= 2) {
     $resource = $parts[1];
 
