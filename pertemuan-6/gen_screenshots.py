@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Membuat 3 screenshot bukti pengujian (gaya terminal) dari hasil nyata test_api.sh.
+"""Membuat 3 bukti pengujian sebagai SVG (gaya terminal) dari hasil nyata test_api.sh.
+SVG dipilih karena aman di-push via API GitHub dan langsung ter-render di repo.
 ID submission/file diambil dinamis dari docs/bukti/."""
 import json
 import os
 import re
-from PIL import Image, ImageDraw, ImageFont
+from xml.sax.saxutils import escape
 
 BASE = os.path.dirname(os.path.abspath(__file__))  # pertemuan-6/
 BUKTI = os.path.join(BASE, "docs", "bukti")
@@ -16,46 +17,46 @@ def read_bukti(name):
     with open(os.path.join(BUKTI, name), encoding="utf-8") as f:
         txt = f.read()
     body = txt[: txt.rfind("HTTP ")].strip()
-    code = re.search(r"HTTP (\d+)", txt).group(1)
-    return json.loads(body), code
+    return json.loads(body)
 
 
-s1a, _ = read_bukti("s1a-buat-submission.txt")
-s1b, _ = read_bukti("s1b-upload-file.txt")
+s1a = read_bukti("s1a-buat-submission.txt")
+s1b = read_bukti("s1b-upload-file.txt")
 SUBID = s1a["id"]
 FILEID = s1b["file_id"]
 SIZE = s1b["size_bytes"]
 
-FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
-FONT_B = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf"
-f_reg = ImageFont.truetype(FONT, 17)
-f_bold = ImageFont.truetype(FONT_B, 17)
-f_title = ImageFont.truetype(FONT_B, 20)
-
 BG, FG = "#0d1117", "#e6edf3"
 GREEN, RED, DIM, ACCENT = "#7ee787", "#ff7b72", "#8b949e", "#79c0ff"
-W, PAD, LH = 1160, 30, 27
+W, PAD, LH, FS = 1160, 30, 27, 17
 
 
 def render(fname, title, subtitle, lines):
     h = PAD * 2 + 60 + len(lines) * LH + 20
-    img = Image.new("RGB", (W, h), BG)
-    d = ImageDraw.Draw(img)
-    d.rectangle([0, 0, W, 58], fill="#161b22")
-    d.text((PAD, 14), title, font=f_title, fill=FG)
-    d.text((PAD, 66), subtitle, font=f_reg, fill=DIM)
-    y = PAD + 70
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" font-family="ui-monospace, Menlo, Consolas, monospace">',
+        f'<rect width="{W}" height="{h}" fill="{BG}"/>',
+        f'<rect width="{W}" height="58" fill="#161b22"/>',
+        f'<text x="{PAD}" y="36" fill="{FG}" font-size="20" font-weight="bold">{escape(title)}</text>',
+        f'<text x="{PAD}" y="88" fill="{DIM}" font-size="{FS}">{escape(subtitle)}</text>',
+    ]
+    y = PAD + 70 + 13
     for text, color in lines:
-        d.text((PAD, y), text, font=f_bold if text.startswith("$") else f_reg, fill=color)
+        w = ' font-weight="bold"' if text.startswith("$") else ""
+        parts.append(
+            f'<text x="{PAD}" y="{y}" fill="{color}" font-size="{FS}"{w}>{escape(text)}</text>'
+        )
         y += LH
-    img.save(os.path.join(OUT, fname))
-    print("OK:", fname, img.size)
+    parts.append("</svg>")
+    with open(os.path.join(OUT, fname), "w", encoding="utf-8") as f:
+        f.write("\n".join(parts))
+    print("OK:", fname)
 
 
 G, R, F, D, A = GREEN, RED, FG, DIM, ACCENT
 
 render(
-    "01-permintaan-valid.png",
+    "01-permintaan-valid.svg",
     "Skenario 1 — Permintaan valid",
     "Mini-LMS Submission/File Service · Kelompok 4 · POST + GET submission/file",
     [
@@ -80,7 +81,7 @@ render(
 )
 
 render(
-    "02-assignment-tidak-ditemukan.png",
+    "02-assignment-tidak-ditemukan.svg",
     "Skenario 2 — Assignment tidak ditemukan → 404",
     "Mini-LMS Submission/File Service · Kelompok 4 · POST /api/submissions",
     [
@@ -95,7 +96,7 @@ render(
 )
 
 render(
-    "03-input-tidak-lengkap.png",
+    "03-input-tidak-lengkap.svg",
     "Skenario 3 — Input tidak lengkap → 400",
     "Mini-LMS Submission/File Service · Kelompok 4 · POST /api/submissions",
     [

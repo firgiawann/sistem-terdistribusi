@@ -13,7 +13,7 @@ Bukti mentah (output curl asli): `docs/bukti/`.
 
 Alur lengkap: buat metadata → unggah file → ambil detail → unduh & verifikasi bytes.
 
-![Skenario 1](screenshots/01-permintaan-valid.png)
+![Skenario 1](screenshots/01-permintaan-valid.svg)
 
 - `POST /api/submissions` → **201**, submission `sub_065c5642d908` berstatus `draft`.
 - `POST /api/submissions/sub_065c5642d908/file` (laporan.pdf, 887 bytes) → **201**,
@@ -25,14 +25,14 @@ Alur lengkap: buat metadata → unggah file → ambil detail → unduh & verifik
 
 ## Skenario 2 — Assignment tidak ditemukan → 404 ✅
 
-![Skenario 2](screenshots/02-assignment-tidak-ditemukan.png)
+![Skenario 2](screenshots/02-assignment-tidak-ditemukan.svg)
 
 `POST /api/submissions` dengan `"assignment_id": "tugas-999"` → **404**
 `assignment_tidak_ditemukan`.
 
 ## Skenario 3 — Input tidak lengkap → 400 ✅
 
-![Skenario 3](screenshots/03-input-tidak-lengkap.png)
+![Skenario 3](screenshots/03-input-tidak-lengkap.svg)
 
 `POST /api/submissions` tanpa `student_id` → **400** `input_tidak_lengkap`
 dengan daftar field yang kurang: `["student_id"]`.

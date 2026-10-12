@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="599" font-family="ui-monospace, Menlo, Consolas, monospace">
+<rect width="1160" height="599" fill="#0d1117"/>
+<rect width="1160" height="58" fill="#161b22"/>
+<text x="30" y="36" fill="#e6edf3" font-size="20" font-weight="bold">Skenario 1 — Permintaan valid</text>
+<text x="30" y="88" fill="#8b949e" font-size="17">Mini-LMS Submission/File Service · Kelompok 4 · POST + GET submission/file</text>
+<text x="30" y="113" fill="#7ee787" font-size="17" font-weight="bold">$ curl -X POST localhost:8000/api/submissions \</text>
+<text x="30" y="140" fill="#7ee787" font-size="17">    -d '{"assignment_id":"tugas-01","student_id":"240209501100",...}'</text>
+<text x="30" y="167" fill="#7ee787" font-size="17">→ HTTP 201 Created</text>
+<text x="30" y="194" fill="#e6edf3" font-size="17">  { "id": "sub_133f8f66d528", "status": "draft",</text>
+<text x="30" y="221" fill="#e6edf3" font-size="17">    "upload_file": "/api/submissions/sub_133f8f66d528/file" }</text>
+<text x="30" y="248" fill="#e6edf3" font-size="17"></text>
+<text x="30" y="275" fill="#7ee787" font-size="17" font-weight="bold">$ curl -X POST localhost:8000/api/submissions/sub_133f8f66d528/file \</text>
+<text x="30" y="302" fill="#7ee787" font-size="17">    -d '{"file_name":"laporan.pdf","content_base64":"&lt;887 bytes&gt;"}'</text>
+<text x="30" y="329" fill="#7ee787" font-size="17">→ HTTP 201 Created</text>
+<text x="30" y="356" fill="#e6edf3" font-size="17">  { "file_id": "file_d245740395f1", "size_bytes": 887,</text>
+<text x="30" y="383" fill="#e6edf3" font-size="17">    "download_url": "/api/files/file_d245740395f1" }</text>
+<text x="30" y="410" fill="#e6edf3" font-size="17"></text>
+<text x="30" y="437" fill="#7ee787" font-size="17" font-weight="bold">$ curl localhost:8000/api/submissions/sub_133f8f66d528</text>
+<text x="30" y="464" fill="#7ee787" font-size="17">→ HTTP 200 OK — "status": "dikumpulkan", file terisi</text>
+<text x="30" y="491" fill="#e6edf3" font-size="17"></text>
+<text x="30" y="518" fill="#7ee787" font-size="17" font-weight="bold">$ curl -o unduhan.pdf localhost:8000/api/files/file_d245740395f1</text>
+<text x="30" y="545" fill="#7ee787" font-size="17">→ HTTP 200 OK — bytes unduhan identik dengan file asli ✓</text>
+</svg>
