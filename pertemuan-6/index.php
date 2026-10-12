@@ -131,6 +131,15 @@ function public_submission(array $s): array
 }
 
 /* ------------------------------------------------------------------ http */
+/* CORS: izinkan halaman tester (mis. di GitHub Pages) memanggil API ini. */
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'OPTIONS') {
+    http_response_code(204);
+    exit;
+}
+
 function send_json(int $status, $data): void
 {
     http_response_code($status);
