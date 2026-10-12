@@ -1,0 +1,13 @@
+{
+    "file_id": "file_d245740395f1",
+    "file_name": "laporan.pdf",
+    "size_bytes": 887,
+    "mime_type": "application/pdf",
+    "uploaded_at": "2026-10-12T12:18:40+00:00",
+    "download_url": "/api/files/file_d245740395f1",
+    "submission": {
+        "id": "sub_133f8f66d528",
+        "status": "dikumpulkan"
+    }
+}
+HTTP 201

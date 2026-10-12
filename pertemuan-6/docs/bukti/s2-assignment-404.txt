@@ -1,0 +1,5 @@
+{
+    "error": "assignment_tidak_ditemukan",
+    "message": "Assignment 'tugas-999' tidak ditemukan."
+}
+HTTP 404

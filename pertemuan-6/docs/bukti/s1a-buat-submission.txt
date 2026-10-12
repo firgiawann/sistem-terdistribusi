@@ -1,0 +1,16 @@
+{
+    "id": "sub_133f8f66d528",
+    "assignment_id": "tugas-01",
+    "assignment_title": "Laporan Analisis Protokol",
+    "student_id": "240209501100",
+    "student_name": "Firgiawan Listianto",
+    "notes": "Pengumpulan laporan",
+    "status": "draft",
+    "created_at": "2026-10-12T12:18:40+00:00",
+    "file": null,
+    "links": {
+        "self": "/api/submissions/sub_133f8f66d528",
+        "upload_file": "/api/submissions/sub_133f8f66d528/file"
+    }
+}
+HTTP 201

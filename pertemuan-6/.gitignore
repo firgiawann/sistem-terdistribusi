@@ -1,0 +1,6 @@
+# Data runtime (dibuat otomatis saat server berjalan)
+data/submissions.json
+data/files.json
+storage/
+__pycache__/
+*.pyc

@@ -1,0 +1,8 @@
+{
+    "error": "input_tidak_lengkap",
+    "message": "Field wajib belum diisi.",
+    "missing": [
+        "student_id"
+    ]
+}
+HTTP 400

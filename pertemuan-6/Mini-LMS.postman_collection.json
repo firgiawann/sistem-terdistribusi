@@ -1,0 +1,279 @@
+{
+  "info": {
+    "name": "Mini-LMS Submission/File Service",
+    "description": "Koleksi pengujian P06.2 Kelompok 4 — Sistem Terdistribusi Pilihan C.\nJalankan server dulu: php -S localhost:8000 index.php\nUrutan: 1 -> 4 -> 7 -> 8 (sub_id & file_id tersimpan otomatis).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000"
+    },
+    {
+      "key": "sub_id",
+      "value": ""
+    },
+    {
+      "key": "file_id",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Buat submission (valid)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/submissions",
+          "host": [
+            "{{base_url}}/api/submissions"
+          ]
+        },
+        "description": "Harap: 201. sub_id tersimpan otomatis.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"assignment_id\": \"tugas-01\", \"student_id\": \"240209501100\", \"student_name\": \"Firgiawan Listianto\", \"notes\": \"Pengumpulan via Postman\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"201 Created\", () => pm.response.to.have.status(201));",
+              "const j = pm.response.json();",
+              "pm.collectionVariables.set(\"sub_id\", j.id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Buat submission - assignment 404",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/submissions",
+          "host": [
+            "{{base_url}}/api/submissions"
+          ]
+        },
+        "description": "Harap: 404 assignment_tidak_ditemukan.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"assignment_id\": \"tugas-999\", \"student_id\": \"240209501100\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"404 Not Found\", () => pm.response.to.have.status(404));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Buat submission - input 400",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/submissions",
+          "host": [
+            "{{base_url}}/api/submissions"
+          ]
+        },
+        "description": "Harap: 400 input_tidak_lengkap (student_id kurang).",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"assignment_id\": \"tugas-01\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"400 Bad Request\", () => pm.response.to.have.status(400));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Upload file (valid)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/submissions/{{sub_id}}/file",
+          "host": [
+            "{{base_url}}/api/submissions/{{sub_id}}/file"
+          ]
+        },
+        "description": "Harap: 201. Jalankan setelah no. 1. file_id tersimpan otomatis.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"file_name\": \"laporan.pdf\", \"content_base64\": \"JVBERi0xLjQKMSAwIG9iajw8L1R5cGUvQ2F0YWxvZy9QYWdlcyAyIDAgUj4+ZW5kb2JqCjIgMCBvYmo8PC9UeXBlL1BhZ2VzL0tpZHNbMyAwIFJdL0NvdW50IDE+PmVuZG9iagozIDAgb2JqPDwvVHlwZS9QYWdlL1BhcmVudCAyIDAgUi9NZWRpYUJveFswIDAgMjAwIDIwMF0+PmVuZG9iagp0cmFpbGVyPDwvUm9vdCAxIDAgUj4+Cnh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHg=\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"201 Created\", () => pm.response.to.have.status(201));",
+              "const j = pm.response.json();",
+              "pm.collectionVariables.set(\"file_id\", j.file_id);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. Upload file - tipe 415",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/submissions/{{sub_id}}/file",
+          "host": [
+            "{{base_url}}/api/submissions/{{sub_id}}/file"
+          ]
+        },
+        "description": "Harap: 415 tipe_file_ditolak (atau 409 bila file sudah diupload di no. 4 — buat submission baru dulu bila perlu).",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"file_name\": \"virus.exe\", \"content_base64\": \"TVqQAAMAAAA=\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"status 415 atau 409\", () => pm.expect(pm.response.code).to.be.oneOf([415, 409]));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. Detail submission",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/submissions/{{sub_id}}",
+          "host": [
+            "{{base_url}}/api/submissions/{{sub_id}}"
+          ]
+        },
+        "description": "Harap: 200, status dikumpulkan, file terisi."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"200 OK\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "7. Unduh file",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/files/{{file_id}}",
+          "host": [
+            "{{base_url}}/api/files/{{file_id}}"
+          ]
+        },
+        "description": "Harap: 200, bytes = file yang diupload."
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"200 OK\", () => pm.response.to.have.status(200));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

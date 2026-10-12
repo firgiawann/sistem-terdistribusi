@@ -1,0 +1,9 @@
+{
+    "error": "tipe_file_ditolak",
+    "message": "Tipe '.exe' tidak diizinkan.",
+    "allowed_types": [
+        ".pdf",
+        ".docx"
+    ]
+}
+HTTP 415
